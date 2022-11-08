@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,11 +10,8 @@ export const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 48
-  },
-  eventDate: {
-    color: '#6b6b6b',
-    fontSize: 16
+    marginTop: 48,
+    textAlign: 'center'
   },
   input: {
     flex: 1,
@@ -34,7 +31,7 @@ export const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 5,
-    backgroundColor: '#31cf67',
+    backgroundColor: '#1E6F9F',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -42,6 +39,36 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     marginTop: 36,
-    marginBottom: 42
+    marginBottom: 20
+  },
+  listEmptyTextOne: {
+    fontSize: 14,
+    color: '#333',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 20
+  },
+  listEmptyTextTwo: {
+    fontSize: 14,
+    color: '#333',
+    textAlign: 'center'
+  },
+  results: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: '5%'
+  },
+  textResultsLeft: {
+    fontSize: 12,
+    color: '#4EA8DE'
+  },
+  textResultsRight: {
+    fontSize: 12,
+    color: '#8284FA'
+  },
+  listEmpty:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '50%'
   }
 });

@@ -1,40 +1,75 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Participant } from '../../components/participant';
+import { useState } from 'react';
+import { Alert, FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Header from '../../components/header';
+import { Task } from '../../components/task';
 import { styles } from './style';
+import { FontAwesome } from '@expo/vector-icons'; 
+
 
 export default function Home() {
-  const participants = ['Felipe', 'Diego', 'Marciel'];
-  
+  //const participants = ['Felipe'];
+  const [tasks, setTasks] = useState<string[]>([]);
+  const [taskName, setTaskName] = useState('');
+
   function handleParticipantAdd(){
-    console.log("ADD ");
+    if(tasks.includes('Lucas')){
+      return Alert.alert('Participante existe', 'Já existe um participante com esse nome!');
+    }
+
+    setTasks(prevState => [...prevState, taskName]);
+    setTaskName('');
   }
 
   function handleParticipantRemove(name: string){
-    console.log("REMOVE", name);
+    Alert.alert("Remover", `Remover o participante ${name}`, [
+      {
+        text: 'Sim',
+        onPress: () => setTasks(prevState => prevState.filter(task => task !== name))
+      },
+      {
+        text: 'Não',
+        style: 'cancel'
+      }
+    ])
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.eventName}>Nome do Evento</Text>
-      <Text style={styles.eventDate}>
-        Sexta, 4 de Novembro de 2022.
-      </Text>
+      <Header/>
       <View style={styles.form}>
         <TextInput 
         style={styles.input}
-        placeholder="Nome do participante"
+        placeholder="Adicionar uma nova tarefa"
         placeholderTextColor="#6B6b6b"
+        onChangeText={setTaskName}
+        value={taskName}
         />
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
-      {
-        participants.map(participant => (
-          <Participant name={participant} onRemove={() => handleParticipantRemove("Lucas")}/>
-        ))
-      }
+      <View style={styles.results}>
+        <Text style={styles.textResultsLeft}>Criadas</Text>
+        <Text style={styles.textResultsRight}>Concluídas</Text>
+      </View>
+      <FlatList
+        data={tasks}
+        keyExtractor={taks => taks}
+        renderItem={({item}) => (
+          <Task name={item} key={item} onRemove={() => handleParticipantRemove(item)}/>
+        )}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => (
+          <>
+            <View style={styles.listEmpty}>
+              <FontAwesome name="wpforms" size={24} color="#808080" />
+              <Text style={styles.listEmptyTextOne}>Você ainda não tem tarefas cadastradas</Text>
+              <Text style={styles.listEmptyTextTwo}>Crie tarefas e organize seus itens a fazer</Text>
+            </View>
+          </>
+        )}
+      />
     </View>
   );
 }

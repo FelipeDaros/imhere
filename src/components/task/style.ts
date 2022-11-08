@@ -8,23 +8,26 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10
+    marginBottom: 10,
+    paddingHorizontal: 10
   },
-  name: {
+  nameCheck: {
+    flex: 1,
+    fontSize: 16,
+    color: '#808080',
+    marginLeft: 16,
+    textDecorationLine: 'line-through'
+  },
+  nameNotCheck: {
     flex: 1,
     fontSize: 16,
     color: '#fff',
-    marginLeft: 16
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 25
+    marginLeft: 16,
   },
   button: {
     width: 56,
     height: 56,
     borderRadius: 5,
-    backgroundColor: '#e23c44',
     alignItems: 'center',
     justifyContent: 'center'
   },
